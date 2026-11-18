@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +10,34 @@
 </head>
 <body>
   <div class="app-shell">
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="brand-mark">✦</div>
       <h2>Conversion Settings</h2>
 
       <div class="setting-block">
         <label for="width">ASCII Output Width</label>
-        <div class="range-value"><output id="widthValue">100</output></div>
+        <div class="range-value">
+          <output id="widthValue">100</output>
+        </div>
         <input id="width" type="range" min="40" max="180" value="100">
       </div>
 
-      <label class="check-row"><input id="invert" type="checkbox"> <span>Invert Brightness</span></label>
-      <label class="check-row"><input id="adaptive" type="checkbox" checked> <span>Adaptive Contrast</span></label>
-      <label class="check-row"><input id="edge" type="checkbox"> <span>Edge-Aware Enhancement</span></label>
+      <label class="check-row">
+        <input id="invert" type="checkbox">
+        <span>Invert Brightness</span>
+      </label>
+
+      <label class="check-row">
+        <input id="adaptive" type="checkbox" checked>
+        <span>Adaptive Contrast</span>
+      </label>
+
+      <label class="check-row">
+        <input id="edge" type="checkbox">
+        <span>Edge-Aware Enhancement</span>
+      </label>
 
       <div class="setting-block">
         <label for="style">Choose ASCII Style</label>
@@ -38,10 +54,14 @@
         <span>Enable Comparison Mode</span>
       </label>
 
-      <div class="sidebar-note">Images are processed locally in your browser.</div>
+      <div class="sidebar-note">
+        Images are processed locally in your browser.
+      </div>
     </aside>
 
+    <!-- MAIN CONTENT -->
     <main class="main-content">
+
       <header class="top-header">
         <div class="title-row">
           <div class="app-icon">🖼️</div>
@@ -52,17 +72,78 @@
         </div>
       </header>
 
+      <!-- ACCOUNT SECTION -->
+      <section class="auth-card">
+        <h2>My Account</h2>
+        <p id="authMessage">
+          Login or create an account to save your ASCII conversions.
+        </p>
+
+        <div id="authForms">
+          <input
+            id="authName"
+            type="text"
+            placeholder="Your name"
+            autocomplete="name"
+          >
+
+          <input
+            id="authEmail"
+            type="email"
+            placeholder="Email address"
+            autocomplete="email"
+          >
+
+          <input
+            id="authPassword"
+            type="password"
+            placeholder="Password (minimum 8 characters)"
+            autocomplete="current-password"
+          >
+
+          <div class="auth-actions">
+            <button id="signupButton" type="button">
+              Create Account
+            </button>
+
+            <button id="loginButton" type="button">
+              Login
+            </button>
+          </div>
+        </div>
+
+        <div id="loggedInPanel" hidden>
+          <p>Logged in as <strong id="accountName"></strong></p>
+          <button id="logoutButton" type="button">Logout</button>
+        </div>
+      </section>
+
+      <!-- IMAGE UPLOAD -->
       <section class="upload-card">
         <div class="section-eyebrow">CHOOSE IMAGE SOURCE</div>
-        <div class="source-choice"><span class="active-dot"></span> Upload Image</div>
+
+        <div class="source-choice">
+          <span class="active-dot"></span>
+          Upload Image
+        </div>
+
         <label class="drop-zone" for="imageInput">
           <span class="upload-button">⇧ &nbsp; Upload</span>
           <span class="upload-help">JPG, PNG or WEBP image</span>
-          <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp">
+
+          <input
+            id="imageInput"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+          >
         </label>
-        <p id="message" class="status-message">Please upload a JPG or PNG image to get started.</p>
+
+        <p id="message" class="status-message">
+          Please upload an image to get started.
+        </p>
       </section>
 
+      <!-- FEATURES -->
       <section class="features">
         <h2>Features</h2>
         <ul>
@@ -71,40 +152,84 @@
           <li>Multiple ASCII Styles</li>
           <li>Normal vs Enhanced Comparison</li>
           <li>Downloadable ASCII Output</li>
+          <li>Personal Conversion History</li>
         </ul>
       </section>
 
+      <!-- SINGLE RESULT -->
       <section id="singleResults" class="results-grid">
         <article class="result-card">
           <h3>Original Image</h3>
-          <div class="image-stage"><img id="preview" alt="Selected image preview"></div>
+          <div class="image-stage">
+            <img id="preview" alt="Selected image preview">
+          </div>
         </article>
+
         <article class="result-card">
           <h3>ASCII Output</h3>
           <pre id="output">Your ASCII art will appear here.</pre>
         </article>
       </section>
 
+      <!-- COMPARISON RESULT -->
       <section id="comparisonResults" class="comparison-grid" hidden>
         <article class="result-card">
           <h3>Normal ASCII</h3>
-          <pre id="normalOutput">Normal conversion will appear here.</pre>
+          <pre id="normalOutput">
+Normal conversion will appear here.
+          </pre>
         </article>
+
         <article class="result-card">
           <h3>Enhanced ASCII</h3>
-          <pre id="enhancedOutput">Enhanced conversion will appear here.</pre>
+          <pre id="enhancedOutput">
+Enhanced conversion will appear here.
+          </pre>
         </article>
       </section>
 
+      <!-- DOWNLOAD AND SAVE -->
       <div class="download-row">
-        <button id="convert" class="primary-button" disabled>Convert to ASCII</button>
-        <button id="downloadTxt" disabled>Download TXT</button>
-        <button id="downloadPng" disabled>Download ASCII PNG</button>
+        <button id="convert" class="primary-button" disabled>
+          Convert to ASCII
+        </button>
+
+        <button id="downloadTxt" disabled>
+          Download TXT
+        </button>
+
+        <button id="downloadPng" disabled>
+          Download ASCII PNG
+        </button>
+
+        <button id="saveConversion" disabled>
+          Save Conversion
+        </button>
       </div>
+
+      <!-- SAVED HISTORY -->
+      <section class="history-card">
+        <div class="history-heading">
+          <h2>My Saved Conversions</h2>
+          <button id="refreshHistory" type="button">
+            Refresh History
+          </button>
+        </div>
+
+        <div id="historyList">
+          <p>Login to view your saved conversions.</p>
+        </div>
+      </section>
+
+      <!-- CANVAS -->
       <canvas id="workCanvas" hidden></canvas>
       <canvas id="exportCanvas" hidden></canvas>
+
     </main>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
+
+    
